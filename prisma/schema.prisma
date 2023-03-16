@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Allreservation {
+  allreserv_pk Int       @id @default(autoincrement())
+  studyroom    Int
+  timeline     String    @db.VarChar(30)
+  Studyroom    Studyroom @relation(fields: [studyroom], references: [studyroom_pk], onDelete: Cascade, map: "allreservation_studyroom_studyroom_pk_fk")
+}
+
+model Building {
+  building_pk   Int         @id @unique @default(autoincrement())
+  building_name String      @unique @db.VarChar(10)
+  Studyroom     Studyroom[]
+}
+
+model Reservation {
+  reservation_pk Int       @id(map: "reservation_pkey") @default(autoincrement())
+  reserv_user    Int
+  studyroom      Int
+  reserv_time    String    @default(dbgenerated("0")) @db.VarChar(30)
+  reserv_date    String    @db.VarChar(30)
+  Studyroom      Studyroom @relation(fields: [studyroom], references: [studyroom_pk], onDelete: Cascade, map: "reservation_studyroom_studyroom_pk_fk")
+  User           User      @relation(fields: [reserv_user], references: [user_id], onDelete: Cascade, map: "reservation_user_user_id_fk")
+}
+
+model Studyroom {
+  studyroom_pk   Int              @id(map: "studyroom_pkey") @default(autoincrement())
+  studyroom_num  Int
+  building       String           @db.VarChar(10)
+  Allreservation Allreservation[]
+  Reservation    Reservation[]
+  Building       Building         @relation(fields: [building], references: [building_name], onDelete: NoAction, onUpdate: NoAction, map: "studyroom_building_building_name_fk")
+}
+
+model User {
+  user_pk     Int           @unique @default(autoincrement())
+  user_id     Int           @id
+  user_name   String        @db.VarChar(50)
+  Reservation Reservation[]
+}
