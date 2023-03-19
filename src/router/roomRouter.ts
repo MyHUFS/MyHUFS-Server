@@ -11,7 +11,7 @@ router.get("/", roomController.getAllStudyroom);
 router.get("/:building", roomController.getBuilding);
 
 //* 건물별 스터디룸 조회 (GET /studyroom/:building/spec)
-router.get("/:building", roomController.getStudyroom);
+router.get("/:building/spec", roomController.getStudyroom);
 
 //* 스터디룸 예약 (POST /studyroom/:building/spec)
 router.post("/:building", roomController.createReservation);

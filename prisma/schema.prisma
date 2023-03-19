@@ -15,17 +15,20 @@ model Allreservation {
 }
 
 model Building {
-  building_pk   Int         @id @unique @default(autoincrement())
-  building_name String      @unique @db.VarChar(10)
+  building_pk   Int           @id @unique @default(autoincrement())
+  building_name String        @unique @db.VarChar(10)
+  Reservation   Reservation[]
   Studyroom     Studyroom[]
 }
 
 model Reservation {
   reservation_pk Int       @id(map: "reservation_pkey") @default(autoincrement())
   reserv_user    Int
+  building       Int
   studyroom      Int
   reserv_time    String    @default(dbgenerated("0")) @db.VarChar(30)
   reserv_date    String    @db.VarChar(30)
+  Building       Building  @relation(fields: [building], references: [building_pk], onDelete: Cascade, map: "reservation_building_building_pk_fk")
   Studyroom      Studyroom @relation(fields: [studyroom], references: [studyroom_pk], onDelete: Cascade, map: "reservation_studyroom_studyroom_pk_fk")
   User           User      @relation(fields: [reserv_user], references: [user_id], onDelete: Cascade, map: "reservation_user_user_id_fk")
 }
