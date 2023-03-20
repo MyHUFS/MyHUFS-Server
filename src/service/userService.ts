@@ -1,5 +1,6 @@
 import { CancelReservationDto } from './../interfaces/user/CancelReservationDTO';
 import { PrismaClient } from "@prisma/client"
+import { sc } from '../constants';
 
 const prisma = new PrismaClient();
 
@@ -13,20 +14,24 @@ const getReservation = async ( user_id: number ) => {
     return data
 }
 
-// const cancelReservation = async ( cancelReservationDto : CancelReservationDto ) => {
-//     const reserv_id = await prisma.reservation.findFirst({
-//         where: {
-//             cancelReservationDto,
-//         }
-//     })
+const cancelReservation = async ( cancelReservationDto : CancelReservationDto ) => {
+    const reserv_id = await prisma.reservation.findFirst({
+        where: {
+            ...cancelReservationDto,
+        }
+    })
 
-//     return await prisma.reservation.delete({
-//         where: {
-//             reservation_pk: reserv_id?.reservation_pk
-//         }
-//     })
+    if (!reserv_id) {
+        return sc.NOT_FOUND;
+    }
 
-// }
+    return await prisma.reservation.delete({
+        where: {
+            reservation_pk: reserv_id.reservation_pk
+        }
+    })
+
+}
 
 const userService = {
     getReservation,

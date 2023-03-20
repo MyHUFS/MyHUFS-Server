@@ -20,7 +20,7 @@ const cancelReservation = async (req: Request, res: Response) => {
     const cancelReservationDto :CancelReservationDto = req.body;
     // const cancel = await userService.cancelReservation(cancelReservationDto);
     const cancel = 0;
-    if (!cancel){
+    if (cancel === sc.NOT_FOUND){
         return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.INVALID_USER));
     }
 
