@@ -2,7 +2,7 @@ import { BuildingResponseDto } from './../interfaces/room/BuildingResponseDTO';
 import { CreateReservationDto } from './../interfaces/room/CreateReservationDTO.ts';
 import { PrismaClient } from "@prisma/client"
 import { findStudyroom } from '../middlewares.ts/findStudyroom';
-import { findBuilding_eng, findBuilding_kor, findBuilding_name, findMonthly } from '../middlewares.ts/findBuildingID';
+import { findBuilding_eng, findBuilding_kor, findBuilding_name, findMonthly } from '../middlewares.ts/findBuilding';
 import { timeCalculator } from '../middlewares.ts/time';
 
 const prisma = new PrismaClient();
