@@ -34,7 +34,16 @@ const findMonthly = async (month: number, building: string) => {
     console.log(reservation)
     let reserv_cnt : number[] = createZeroArray(31)
     reservation.forEach((e) => {
-        reserv_cnt[e.day] = e.cnt
+        const time = e.time.slice(1, e.time.length-1)
+        console.log(time)
+        const cnt_1 = time.match(/1/g)
+        console.log(cnt_1)
+        if (cnt_1){
+            reserv_cnt[e.day] = cnt_1.length
+        }
+        else {
+            reserv_cnt[e.day] = 0
+        }
     })
     return reserv_cnt
 }

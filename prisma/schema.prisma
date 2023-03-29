@@ -53,7 +53,8 @@ model Reservationcnt {
   reserv_cnt_pk Int    @id @default(autoincrement())
   year          Int
   month         Int
-  cnt           Int    @default(0)
+  time          String @default(dbgenerated("0")) @db.VarChar(30)
   day           Int
   building      String @db.VarChar(10)
+  studyroom     Int
 }
