@@ -35,7 +35,7 @@ const cancelReservation = async ( cancelReservationDto : CancelReservationDto ) 
 
 const userService = {
     getReservation,
-    // cancelReservation
+    cancelReservation
 };
 
 export default userService;

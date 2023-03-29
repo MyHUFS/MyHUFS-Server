@@ -13,13 +13,13 @@ const getReservation = async (req: Request, res: Response) => {
         return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.INVALID_USER));
     }
 
-    return res.status(sc.OK).send(success(sc.OK, rm.READ_ALL_STUDYROOM_SUCCESS));
+    return res.status(sc.OK).send(success(sc.OK, rm.RESERVATION_GET_SUCCESS, reservation));
 }
 
 const cancelReservation = async (req: Request, res: Response) => {
     const cancelReservationDto :CancelReservationDto = req.body;
-    // const cancel = await userService.cancelReservation(cancelReservationDto);
-    const cancel = 0;
+    const cancel = await userService.cancelReservation(cancelReservationDto);
+
     if (cancel === sc.NOT_FOUND){
         return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.INVALID_USER));
     }
