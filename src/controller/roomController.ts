@@ -18,19 +18,21 @@ const getBuilding = async (req: Request, res: Response) => {
 }
 
 
-
 const getStudyroom = async (req: Request, res: Response) => {
     const { building } = req.params;
-    const data = await roomService.getStudyroom( building );
+    const { month, day } = req.body;
+    const data = await roomService.getStudyroom( building, month, day );
+    return res.status(sc.OK).send(success(sc.OK,rm.READ_STUDYROOM_SUCCESS, data));
 }
 
 const createReservation = async (req: Request, res: Response) => {
     const createReservationDto : CreateReservationDto = req.body;
     const data = await roomService.createReservation( createReservationDto );
-    if (!data[0]) {
-        return res.status(sc.ACCEPTED).send(fail(sc.ACCEPTED, rm.RESERVATION_FAIL))
+    if (data === sc.BAD_REQUEST){
+        return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.RESERVATION_FAIL))
     }
-    return res.status(sc.OK).send(success(sc.OK,rm.RESERVATION_SUCCESS, data[1]));
+
+    return res.status(sc.OK).send(success(sc.OK,rm.RESERVATION_SUCCESS, data));
 }
 
 
