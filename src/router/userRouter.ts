@@ -7,7 +7,7 @@ const router: Router = Router();
 //* 예약 조회 (GET /user/reservation)
 router.get('/reservation', userController.getReservation);
 
-//* 예약 취소 (DELETE /user/reservation)
-router.delete('/reservation', userController.cancelReservation);
+//* 예약 취소 (POST /user/reservation)
+router.post('/reservation', userController.cancelReservation);
 
 export default router;
