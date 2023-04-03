@@ -16,11 +16,11 @@ const geAllStudyroom = async () => {
     return room
 }
 
-const getBuilding = async (building_name: string, month: number) => {
+const getBuilding = async (building_name: string, year: number, month: number) => {
     const building_id = await findBuilding_eng(building_name)
     const building = await findBuilding_name(building_id);
     const total = 0
-    const count = await findMonthly(month, building);
+    const count = await findMonthly(year, month, building);
     const data : BuildingResponseDto = {
         building,
         total,
@@ -30,12 +30,13 @@ const getBuilding = async (building_name: string, month: number) => {
     return data;
 }
 
-const getStudyroom = async (building_name: string, month: number, day: number) => {
+const getStudyroom = async (building_name: string, year: number, month: number, day: number) => {
     const building_key = await findBuilding_eng(building_name);
     const building = await findBuilding_name(building_key);
     const data = await prisma.reservationcnt.findMany({
         where: {
             building,
+            year,
             month,
             day,
         },
