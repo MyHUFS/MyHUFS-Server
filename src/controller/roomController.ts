@@ -12,16 +12,16 @@ const getAllStudyroom = async (req: Request, res: Response) => {
 
 const getBuilding = async (req: Request, res: Response) => {
     const { building } = req.params;
-    const { month } = req.body;
-    const data = await roomService.getBuilding( building, month );
+    const { year, month } = req.body;
+    const data = await roomService.getBuilding( building, year, month );
     return res.status(sc.OK).send(success(sc.OK,rm.READ_STUDYROOM_SUCCESS, data));
 }
 
 
 const getStudyroom = async (req: Request, res: Response) => {
     const { building } = req.params;
-    const { month, day } = req.body;
-    const data = await roomService.getStudyroom( building, month, day );
+    const { year, month, day } = req.body;
+    const data = await roomService.getStudyroom( building, year, month, day );
     return res.status(sc.OK).send(success(sc.OK,rm.READ_STUDYROOM_SUCCESS, data));
 }
 

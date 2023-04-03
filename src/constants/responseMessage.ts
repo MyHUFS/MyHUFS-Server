@@ -42,6 +42,9 @@ export default {
   READ_STUDYROOM_SUCCESS: "스터디룸 조회 성공",
   RESERVATION_SUCCESS: "예약 성공",
   RESERVATION_FAIL: "예약 실패", 
+  RESERVATION_GET_SUCCESS: "예약 조회 성공",
+  RESERVATION_CANCEL_SUCCESS: "예약 취소 성공",
+  INVALLID_RESERVATION: "존재하지 않는 예약입니다",
 
   // 토큰
   CREATE_TOKEN_SUCCESS: "토큰 재발급 성공",

@@ -5,9 +5,9 @@ import { body } from "express-validator"
 const router: Router = Router();
 
 //* 예약 조회 (GET /user/reservation)
-router.get('/', userController.getReservation);
+router.get('/reservation', userController.getReservation);
 
-//* 예약 취소 (DELETE /user/reservation)
-router.delete('/', userController.cancelReservation);
+//* 예약 취소 (POST /user/reservation)
+router.post('/reservation', userController.cancelReservation);
 
 export default router;

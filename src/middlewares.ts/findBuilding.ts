@@ -23,10 +23,11 @@ const createZeroArray = function(len : number) {
     return new Array(len).fill(0);
   }
 
-const findMonthly = async (month: number, building: string) => {
+const findMonthly = async (year: number, month: number, building: string) => {
 
     const reservation = await prisma.reservationcnt.findMany({
         where: {
+            year,
             month,
             building,
         }
