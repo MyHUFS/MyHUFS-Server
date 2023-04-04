@@ -1,3 +1,4 @@
+import { ReservationCntDto } from './../interfaces/room/ReservationCntDTO';
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -34,7 +35,7 @@ const findMonthly = async (year: number, month: number, building: string) => {
     })
     console.log(reservation)
     let reserv_cnt : number[] = createZeroArray(31)
-    reservation.forEach((e) => {
+    reservation.forEach((e : ReservationCntDto) => {
         const time = e.time.slice(1, e.time.length-1)
         console.log(time)
         const cnt_1 = time.match(/1/g)

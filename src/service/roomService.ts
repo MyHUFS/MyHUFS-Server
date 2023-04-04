@@ -1,3 +1,4 @@
+import { BuildingDto } from './../interfaces/room/BuildingDTO';
 import { BuildingResponseDto } from './../interfaces/room/BuildingResponseDTO';
 import { CreateReservationDto } from './../interfaces/room/CreateReservationDTO.ts';
 import { PrismaClient } from "@prisma/client"
@@ -10,7 +11,7 @@ const prisma = new PrismaClient();
 
 const geAllStudyroom = async () => {
     const data = await prisma.building.findMany();
-    const room = data.map((e) => {
+    const room = data.map((e: BuildingDto) => {
         return e.building_name
     })
     return room
